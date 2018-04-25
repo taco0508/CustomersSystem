@@ -1,0 +1,380 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>維護客戶主檔</h2>
+
+<div id="grid"></div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#grid").kendoGrid({
+                dataSource: {
+                    transport: {
+                        read:{
+                            type: "GET",
+                            url: "/api/CustomersApi/GetAll"
+                        },
+                        create: {
+                            type: "POST",
+                            url: "/api/CustomersApi/Create"
+                        },
+                        update: {
+                            type: "PUT",
+                            url: "/api/CustomersApi/Update"
+                        },
+                        destroy: {
+                            type: "DELETE",
+                            url: "/api/CustomersApi/Delete"
+                        },
+                    }, schema: {
+                        model: {
+                            id: "CustomerID",
+                            fields: {
+                                CustomerID: {
+                                    type: "string",
+                                    validation: {
+                                        required: { message: "[客戶編號]必填" },
+                                        maxlengthCustomerID: function (input) {
+                                            if (input.is("[name='CustomerID']") && input.val().length > 5) {
+                                                input.attr("data-maxlengthCustomerID-msg", "[客戶編號]最多5個字!");
+                                                return false;
+                                            }
+                                            return true;
+                                        }
+                                    }
+                                },
+                                CompanyName: {
+                                    type: "string",
+                                    validation: {
+                                        required: { message: "[公司名稱]必填" },
+                                        maxlengthCustomerFullName: function (input) {
+                                            if (input.is("[name='CompanyName']") && input.val().length > 40) {
+                                                input.attr("data-maxlengthCompanyName-msg", "[公司名稱]最多40個字!");
+                                                return false;
+                                            }
+                                            return true;
+                                        }
+                                    }
+                                },
+                                ContactName: {
+                                    type: "string",
+                                    validation: {
+                                        required: { message: "[連絡人姓名]必填" },
+                                        maxlengthCustomerShortName: function (input) {
+                                            if (input.is("[name='ContactName']") && input.val().length > 30) {
+                                                input.attr("data-maxlengthContactName-msg", "[連絡人姓名]最多30個字!");
+                                                return false;
+                                            }
+                                            return true;
+                                        }
+                                    }
+                                },
+                                ContactTitle: {
+                                    type: "string",
+                                    validation: {
+                                        required: { message: "[連絡人職稱]必填" },
+                                        maxlengthPrincipal: function (input) {
+                                            if (input.is("[name='ContactTitle']") && input.val().length > 30) {
+                                                input.attr("data-maxlengthContactTitle-msg", "[連絡人職稱]最多30個字!");
+                                                return false;
+                                            }
+                                            return true;
+                                        }
+                                    }
+                                },
+                                Address: {
+                                    type: "string",
+                                    validation: {
+                                        required: { message: "[地址]必填" },
+                                        maxlengthPrincipal: function (input) {
+                                            if (input.is("[name='Address']") && input.val().length > 60) {
+                                                input.attr("data-maxlengthAddress-msg", "[地址]最多60個字!");
+                                                return false;
+                                            }
+                                            return true;
+                                        }
+                                    }
+                                },
+                                City: {
+                                    type: "string",
+                                    validation: {
+                                        required: { message: "[城市]必填" },
+                                        maxlengthPrincipal: function (input) {
+                                            if (input.is("[name='City']") && input.val().length > 15) {
+                                                input.attr("data-maxlengthCity-msg", "[城市]最多15個字!");
+                                                return false;
+                                            }
+                                            return true;
+                                        }
+                                    }
+                                },
+                                Region: {
+                                    type: "string",
+                                    validation: {
+                                        required: { message: "[地區]必填" },
+                                        maxlengthPrincipal: function (input) {
+                                            if (input.is("[name='Region']") && input.val().length > 15) {
+                                                input.attr("data-maxlengthRegion-msg", "[地區]最多15個字!");
+                                                return false;
+                                            }
+                                            return true;
+                                        }
+                                    }
+                                },
+                                PostalCode: {
+                                    type: "string",
+                                    validation: {
+                                        required: { message: "[郵遞區號]必填" },
+                                        maxlengthPrincipal: function (input) {
+                                            if (input.is("[name='PostalCode']") && input.val().length > 10) {
+                                                input.attr("data-maxlengthPostalCode-msg", "[郵遞區號]最多10個字!");
+                                                return false;
+                                            }
+                                            return true;
+                                        }
+                                    }
+                                },
+                                Country: {
+                                    type: "string",
+                                    validation: {
+                                        required: { message: "[國家]必填" },
+                                        maxlengthPrincipal: function (input) {
+                                            if (input.is("[name='Country']") && input.val().length > 15) {
+                                                input.attr("data-maxlengthCountry-msg", "[國家]最多15個字!");
+                                                return false;
+                                            }
+                                            return true;
+                                        }
+                                    }
+                                },
+                                Phone: {
+                                    type: "string",
+                                    validation: {
+                                        required: { message: "[電話號碼]必填" },
+                                        maxlengthPrincipal: function (input) {
+                                            if (input.is("[name='Phone']") && input.val().length > 24) {
+                                                input.attr("data-maxlengthPhone-msg", "[電話號碼]最多24個字!");
+                                                return false;
+                                            }
+                                            return true;
+                                        }
+                                    }
+                                },
+                                Fax: {
+                                    type: "string",
+                                    validation: {
+                                        required: { message: "[傳真號碼]必填" },
+                                        maxlengthPrincipal: function (input) {
+                                            if (input.is("[name='Fax']") && input.val().length > 24) {
+                                                input.attr("data-maxlengthFax-msg", "[傳真號碼]最多24個字!");
+                                                return false;
+                                            }
+                                            return true;
+                                        }
+                                    }
+                                },
+                            }
+                        }
+                    },
+                    pageSize: 20,
+                    requestEnd: function (e) {
+                        var type = e.type;
+                        //如果是 create或update或destroy
+                        if (type === "create" || type === "update" || type === "destroy") {
+                            this.read(); //重新查詢
+                        }
+                    }
+                },
+                height: 800,
+                //在grid[標頭欄位名稱]下面加上TextBox可以用來篩選
+                filterable: {
+                    mode: "row"
+                },
+                //分群組功能: 可以拖曳[標頭欄位名稱]來分類
+                groupable: {
+                    messages: {
+                        empty: "拖曳欄位至此以群組顯示資料",
+                    }
+                },
+                //排序功能
+                sortable: {
+                    //針對單一個[標頭欄位名稱]，由小排到大、由大排到小
+                    mode: "single"
+                },
+                //分頁功能
+                pageable: {
+                    //重新查詢(會重新到DB撈資料)
+                    refresh: true,
+                    //可以挑選每頁顯示幾筆資料
+                    pageSizes: [50, 100, 200],
+                    //是否顯示頁數的數字，例如:1、2、3，點了就可以跳往該頁
+                    numeric: false,
+                    //輸入頁數的TextBox
+                    input: true,
+                    //顯示的訊息
+                    messages: {
+                        refresh: "重新查詢資料",
+                        display: "第 {0}-{1} 筆，共 {2} 筆資料",
+                        itemsPerPage: "筆每頁",
+                        empty: "查無資料!!",
+                        //搭配輸入頁數的TextBox，前面出現的文字
+                        page: "請輸入頁數",
+                        //搭配輸入頁數的TextBox，後面出現的文字，例如: [10 ]/ 50，其中[10 ]代表輸入框，而/ 50就是這個屬性
+                        of: "/ {0}",
+                        first: "前往第一頁",
+                        next: "下一頁",
+                        previous: "上一頁",
+                        last: "前往最後一頁",
+                    }
+                },
+                //新增資料 按鈕功能列
+                toolbar: [{ name: "create", text: "新增一筆資料" }],
+                columns: [
+                    {
+                        field: "CustomerID",
+                        title: "客戶編號",
+                        filterable: {
+                            cell: {
+                                enabled: true, //是否要啟用[標頭欄位名稱]上篩選用的TextBox
+                                showOperators: false, //關閉漏斗篩選
+                                operator: "contains", //只會選出欄位當中，開頭文字相符的資料，例:輸入a，就只會找a開頭
+                                //suggestionOperator: "contains" //會選出欄位當中，只要有文字相符(不論出現開頭、中間、尾巴)的資料，例:輸入a，就會找abc、cab、bca
+                            }
+                        },
+                        //欄位的寬度
+                        //width: 300
+                    },
+                    {
+                        field: "ContactName",
+                        title: "連絡人姓名",
+                        filterable: {
+                            cell: {
+                                enabled: true, //是否要啟用[標頭欄位名稱]上篩選用的TextBox
+                                showOperators: false, //關閉漏斗篩選
+                                operator: "contains",
+                            }
+                        },
+                    },
+                    {
+                        field: "ContactTitle",
+                        title: "連絡人職稱",
+                        filterable: {
+                            cell: {
+                                enabled: true, //是否要啟用[標頭欄位名稱]上篩選用的TextBox
+                                showOperators: false, //關閉漏斗篩選
+                                operator: "contains",
+                            }
+                        },
+                    },
+                    {
+                        field: "Address",
+                        title: "地址",
+                        filterable: {
+                            cell: {
+                                enabled: true, //是否要啟用[標頭欄位名稱]上篩選用的TextBox
+                                showOperators: false, //關閉漏斗篩選
+                                operator: "contains",
+                            }
+                        },
+                    },
+                    {
+                        field: "City",
+                        title: "城市",
+                        filterable: {
+                            cell: {
+                                enabled: true, //是否要啟用[標頭欄位名稱]上篩選用的TextBox
+                                showOperators: false, //關閉漏斗篩選
+                                operator: "contains",
+                            }
+                        },
+                    },
+                    {
+                        field: "Region",
+                        title: "地區",
+                        filterable: {
+                            cell: {
+                                enabled: true, //是否要啟用[標頭欄位名稱]上篩選用的TextBox
+                                showOperators: false, //關閉漏斗篩選
+                                operator: "contains",
+                            }
+                        },
+                    },
+                    {
+                        field: "PostalCode",
+                        title: "郵遞區號",
+                        filterable: {
+                            cell: {
+                                enabled: true, //是否要啟用[標頭欄位名稱]上篩選用的TextBox
+                                showOperators: false, //關閉漏斗篩選
+                                operator: "contains",
+                            }
+                        },
+                    },
+                    {
+                        field: "Country",
+                        title: "國家",
+                        filterable: {
+                            cell: {
+                                enabled: true, //是否要啟用[標頭欄位名稱]上篩選用的TextBox
+                                showOperators: false, //關閉漏斗篩選
+                                operator: "contains",
+                            }
+                        },
+                    },
+                    {
+                        field: "Phone",
+                        title: "電話號碼",
+                        filterable: {
+                            cell: {
+                                enabled: true, //是否要啟用[標頭欄位名稱]上篩選用的TextBox
+                                showOperators: false, //關閉漏斗篩選
+                                operator: "contains",
+                            }
+                        },
+                    },
+                    {
+                        field: "Fax",
+                        title: "傳真號碼",
+                        filterable: {
+                            cell: {
+                                enabled: true, //是否要啟用[標頭欄位名稱]上篩選用的TextBox
+                                showOperators: false, //關閉漏斗篩選
+                                operator: "contains",
+                            }
+                        },
+                    },
+
+                    //編輯、刪除 按鈕功能列
+                    {
+                        command: [{ name: "edit", text: { edit: "修改", cancel: "取消", update: "更新" } }, { name: "destroy", text: "刪除" }], title: "&nbsp",
+                        title: "&nbsp;",
+                        width: "300px"
+                    }
+                ],
+                //編輯設定
+                editable: {
+                    //編輯模式: popup:彈出小視窗編輯、inline:在grid資料列原地編輯
+                    mode: "popup",
+                    confirmation: "確定要刪除這一筆資料嗎?"
+                },
+                edit: function (e) {
+                    var editWindow = e.container.data("kendoWindow");
+                    if (e.model.isNew()) {
+                        editWindow.title('新增');
+                    }
+                    else {
+                        editWindow.title('修改');
+
+                        //客戶編號 input唯讀
+                        $('[name="CustomerID"]').attr("readonly", true);
+                    }
+                },
+            });
+        });
+
+    </script>
+}

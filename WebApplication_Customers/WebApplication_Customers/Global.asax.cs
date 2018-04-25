@@ -5,14 +5,20 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
+using System.Web.Http; //GlobalConfiguration
+using System.Web.Optimization; //BundleTable
+
 namespace WebApplication_Customers
 {
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
         {
+            GlobalConfiguration.Configure(WebApiConfig.Register);
+
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }
