@@ -249,6 +249,17 @@
                         //width: 300
                     },
                     {
+                        field: "CompanyName",
+                        title: "公司名稱",
+                        filterable: {
+                            cell: {
+                                enabled: true, //是否要啟用[標頭欄位名稱]上篩選用的TextBox
+                                showOperators: false, //關閉漏斗篩選
+                                operator: "contains",
+                            }
+                        },
+                    },
+                    {
                         field: "ContactName",
                         title: "連絡人姓名",
                         filterable: {
