@@ -11,6 +11,10 @@ namespace WebApplication_Customers.Api
 {
     public class CustomersApiController : ApiController
     {
+        /// <summary>
+        /// 查出所有的客戶資料
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public List<Customers> GetAll()
         {

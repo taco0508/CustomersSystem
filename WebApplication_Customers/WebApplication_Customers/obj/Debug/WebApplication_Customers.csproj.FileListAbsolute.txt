@@ -86,3 +86,5 @@ E:\GitCustomers\CustomersSystem\WebApplication_Customers\WebApplication_Customer
 E:\GitCustomers\CustomersSystem\WebApplication_Customers\WebApplication_Customers\bin\System.Net.Http.Formatting.xml
 E:\GitCustomers\CustomersSystem\WebApplication_Customers\WebApplication_Customers\bin\System.Web.Http.xml
 E:\GitCustomers\CustomersSystem\WebApplication_Customers\WebApplication_Customers\bin\System.Web.Http.WebHost.xml
+E:\GitCustomers\CustomersSystem\WebApplication_Customers\WebApplication_Customers\bin\roslyn\System.Collections.Immutable.dll
+E:\GitCustomers\CustomersSystem\WebApplication_Customers\WebApplication_Customers\obj\Debug\WebApplication_Customers.csprojResolveAssemblyReference.cache
